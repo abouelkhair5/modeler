@@ -53,7 +53,7 @@ def load_sketches(fh):
     """Load sketches in a file from the handle @fh to memory as numpy arrays. """
     sketches = list()
     for line in fh:
-        sketch = map(long, line.strip().split())
+        sketch = map(int, line.strip().split())
         sketches.append(sketch)
     return np.array(sketches)
 
@@ -169,7 +169,7 @@ if __name__ == "__main__":
     parser.add_argument('-u', '--test-dir', help='absolute path to the directory that contains all test sketches', required=True)
     parser.add_argument('-m', '--metric', choices=['mean', 'max', 'both'], default='both',
             help='threshold metric to use to calculate the mean or max of the cluster distances between cluster members and the medoid')
-    parser.add_argument('-n', '--num-stds', choices=np.arange(0, 5.0, 0.1), type=float,
+    parser.add_argument('-n', '--num-stds', choices=np.arange(0, 15.0, 0.1), type=float,
             help='the number of standard deviations above the threshold to tolerate')
     parser.add_argument('-s', '--save-model', help='use this flag to save the model', action='store_true')
     parser.add_argument('-S', '--seed', help='seed for random number generator', type=int, default=98765432)
@@ -205,7 +205,7 @@ if __name__ == "__main__":
         metric_config = [args.metric]
     # Determine the number of standard deviations to use
     if not args.num_stds:    # If this argument is not given, we explore different possible configurations.
-        std_config = np.arange(0, 5.0, 0.1)
+        std_config = np.arange(1.0, 5.0, 1.0)
     else:
         std_config = [args.num_stds]
     # Train (all training graphs) #
