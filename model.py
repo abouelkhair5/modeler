@@ -205,7 +205,7 @@ if __name__ == "__main__":
         metric_config = [args.metric]
     # Determine the number of standard deviations to use
     if not args.num_stds:    # If this argument is not given, we explore different possible configurations.
-        std_config = np.arange(1.0, 5.0, 1.0)
+        std_config = np.arange(1.0, 11.0, 1.0)
     else:
         std_config = [args.num_stds]
     # Train (all training graphs) #
